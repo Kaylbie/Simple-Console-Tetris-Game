@@ -7,7 +7,6 @@ public class PieceI extends GamePiece {
             {1, 1, 1, 1}
         };
     }
-
     @Override
     public GamePiece clone() {
         return new PieceI(this.row, this.col);
