@@ -1,5 +1,5 @@
-package commands;
-import controls.PieceControl;
+package command;
+import control.PieceControl;
 public class RotateCommand implements Command {
     private PieceControl pieceControl;
 
@@ -9,6 +9,6 @@ public class RotateCommand implements Command {
 
     @Override
     public void execute() {
-        pieceControl.rotatePiece();
+        pieceControl.checkForRotationPiece();
     }
 }

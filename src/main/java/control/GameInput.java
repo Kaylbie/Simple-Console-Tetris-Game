@@ -1,7 +1,7 @@
-package controls;
+package control;
 
 import board.Board;
-import commands.*;
+import command.*;
 
 import java.util.Scanner;
 import java.util.Map;

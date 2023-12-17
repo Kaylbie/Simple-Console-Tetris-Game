@@ -2,7 +2,7 @@ package main;
 
 import board.Board;
 import board.BoardRender;
-import controls.GameInput;
+import control.GameInput;
 
 public class Tetris {
     private Board board;

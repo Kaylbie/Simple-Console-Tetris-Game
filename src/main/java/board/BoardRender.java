@@ -3,8 +3,8 @@ package board;
 public class BoardRender {
     private static final String ANSI_RESET = "\u001B[0m";
     private static final String ANSI_RED = "\u001B[31m";
-    private static final int WIDTH = 10;
-    private static final int HEIGHT = 10;
+    private static final int width = 10;
+    private static final int height = 10;
     public void printGameStatus(Board board, int score) {
         printBoard(board);
         System.out.println("Score: " + score);
@@ -14,16 +14,16 @@ public class BoardRender {
         System.out.println("Game over! Your score: " + score);
     }
     public void printBoard(Board board) {
-        System.out.println("+" + "-".repeat(WIDTH) + "+");
-        for (int row = 0; row < HEIGHT; row++) {
+        System.out.println("+" + "-".repeat(width) + "+");
+        for (int row = 0; row < height; row++) {
             printRow(board, row);
         }
-        System.out.println("+" + "-".repeat(WIDTH) + "+");
+        System.out.println("+" + "-".repeat(width) + "+");
     }
 
     private void printRow(Board board, int row) {
         System.out.print("|");
-        for (int col = 0; col < WIDTH; col++) {
+        for (int col = 0; col < width; col++) {
             printCell(board, row, col);
         }
         System.out.println("|");

@@ -1,7 +1,7 @@
 package board;
 
-import piece.Piece;
-import controls.PieceControl;
+import control.PieceControl;
+import pieces.GamePiece;
 
 public class Board {
     private int width = 10;
@@ -14,7 +14,7 @@ public class Board {
         spawnNewPiece();
     }
 
-    public boolean canMove(Piece piece, int newRow, int newCol) {
+    public boolean canMove(GamePiece piece, int newRow, int newCol) {
         int[][] shape = piece.getShape();
         for (int row = 0; row < shape.length; row++) {
             for (int col = 0; col < shape[row].length; col++) {
@@ -33,7 +33,6 @@ public class Board {
         return true;
     }
     private void spawnNewPiece() {
-        //pieceControl = new controls.PieceControl(this);
         if (pieceControl == null) {
             pieceControl = new PieceControl(this);
         } else {
@@ -42,7 +41,7 @@ public class Board {
 
     }
     public void fixToGrid() {
-        Piece piece = pieceControl.getCurrentPiece();
+        GamePiece piece = pieceControl.getCurrentPiece();
         for (int row = 0; row < piece.getShape().length; row++) {
             for (int col = 0; col < piece.getShape()[row].length; col++) {
                 if (piece.getShape()[row][col] != 0) {
@@ -85,6 +84,12 @@ public class Board {
     public boolean isCellOccupied(int row, int col) {
         return grid[row][col] == 1 ||
                 (pieceControl.getCurrentPiece() != null && pieceControl.getCurrentPiece().isFilled(row - pieceControl.getCurrentPiece().getRow(), col - pieceControl.getCurrentPiece().getCol()));
+    }
+    public int getHeight() {
+        return height;
+    }
 
+    public int[][] getGrid() {
+        return grid;
     }
 }

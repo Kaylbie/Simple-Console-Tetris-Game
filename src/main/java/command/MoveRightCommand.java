@@ -1,5 +1,5 @@
-package commands;
-import controls.PieceControl;
+package command;
+import control.PieceControl;
 public class MoveRightCommand implements Command {
     private PieceControl pieceControl;
 

@@ -1,34 +1,28 @@
 package factory;
 
-import piece.Piece;
-import piece.PieceType;
+import pieces.*;
 
 public class PieceFactory {
-
-    public static Piece createPiece(PieceType type) {
-        switch (type) {
-            case I:
-                return new Piece(PieceType.I, 0, 0);
-            case J:
-                return new Piece(PieceType.J, 0, 0);
-            case L:
-                return new Piece(PieceType.L, 0, 0);
-            case O:
-                return new Piece(PieceType.O, 0, 0);
-            case S:
-                return new Piece(PieceType.S, 0, 0);
-            case T:
-                return new Piece(PieceType.T, 0, 0);
-            case Z:
-                return new Piece(PieceType.Z, 0, 0);
+    static final int NUM_PIECES = 7;
+    public static GamePiece createRandomPiece(int row, int col) {
+        int randomIndex = (int) (Math.random() * NUM_PIECES);
+        switch (randomIndex) {
+            case 0:
+                return new PieceI(row, col);
+            case 1:
+                return new PieceJ(row, col);
+            case 2:
+                return new PieceL(row, col);
+            case 3:
+                return new PieceO(row, col);
+            case 4:
+                return new PieceS(row, col);
+            case 5:
+                return new PieceT(row, col);
+            case 6:
+                return new PieceZ(row, col);
             default:
-                throw new IllegalArgumentException("Unknown: " + type);
+                throw new IllegalArgumentException("Invalid index");
         }
-    }
-
-    public static Piece createRandomPiece() {
-        PieceType[] types = PieceType.values();
-        int randomIndex = (int) (Math.random() * types.length);
-        return createPiece(types[randomIndex]);
     }
 }
