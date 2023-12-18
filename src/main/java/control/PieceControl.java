@@ -6,9 +6,9 @@ import main.Tetris;
 import pieces.GamePiece;
 
 public class PieceControl {
-    final int defaultRow = 0;
-    final int moveOneStep = 1;
-    final int halfWidth = 2;
+    private final int defaultRow = 0;
+    private final int moveOneStep = 1;
+    private final int halfWidth = 2;
     private Board board;
     private GamePiece currentPiece;
 
@@ -28,6 +28,10 @@ public class PieceControl {
     private int calculateColOffset(GamePiece currentPiece) {
         return board.getWidth() / halfWidth - currentPiece.getShape()[0].length / halfWidth;
     }
+
+
+
+
     public void movePieceDown() {
         if (board.canMove(currentPiece, currentPiece.getRow() + moveOneStep, currentPiece.getCol())) {
             currentPiece.setRow(currentPiece.getRow() + moveOneStep);

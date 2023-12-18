@@ -4,8 +4,8 @@ import control.PieceControl;
 import pieces.GamePiece;
 
 public class Board {
-    private int width = 10;
-    private int height = 10;
+    private final int width = 10;
+    private final int height = 10;
     private int[][] grid;
     private PieceControl pieceControl;
 
@@ -18,19 +18,23 @@ public class Board {
         int[][] shape = piece.getShape();
         for (int row = 0; row < shape.length; row++) {
             for (int col = 0; col < shape[row].length; col++) {
-                if (shape[row][col] != 0) {
-                    int gridRow = newRow + row;
-                    int gridCol = newCol + col;
-                    if (gridRow < 0 || gridRow >= height || gridCol < 0 || gridCol >= width) {
-                        return false;
-                    }
-                    if (grid[gridRow][gridCol] != 0) {
+                if (isPartOfPiece(shape[row][col])) {
+                    if (isOutsideGrid(newRow + row, newCol + col) || isPositionOccupied(newRow + row, newCol + col)) {
                         return false;
                     }
                 }
             }
         }
         return true;
+    }
+    private boolean isPartOfPiece(int shapeValue) {
+        return shapeValue != 0;
+    }
+    private boolean isOutsideGrid(int row, int col) {
+        return row < 0 || row >= height || col < 0 || col >= width;
+    }
+    private boolean isPositionOccupied(int row, int col) {
+        return grid[row][col] != 0;
     }
     private void spawnNewPiece() {
         if (pieceControl == null) {
@@ -41,15 +45,24 @@ public class Board {
 
     }
     public void fixToGrid() {
-        GamePiece piece = pieceControl.getCurrentPiece();
-        for (int row = 0; row < piece.getShape().length; row++) {
-            for (int col = 0; col < piece.getShape()[row].length; col++) {
-                if (piece.getShape()[row][col] != 0) {
-                    grid[piece.getRow() + row][piece.getCol() + col] = 1;
+        GamePiece currentPiece = pieceControl.getCurrentPiece();
+        fixPieceToGrid(currentPiece);
+        spawnNewPiece();
+    }
+
+    private void fixPieceToGrid(GamePiece piece) {
+        int[][] pieceShape = piece.getShape();
+        for (int row = 0; row < pieceShape.length; row++) {
+            for (int col = 0; col < pieceShape[row].length; col++) {
+                if (isPartOfPiece(pieceShape[row][col])) {
+                    occupyGridCell(piece, row, col);
                 }
             }
         }
-        spawnNewPiece();
+    }
+
+    private void occupyGridCell(GamePiece piece, int rowOffset, int colOffset) {
+        grid[piece.getRow() + rowOffset][piece.getCol() + colOffset] = 1;
     }
     public int clearCompletedLines() {
         int linesCleared = 0;
@@ -75,15 +88,15 @@ public class Board {
         }
         grid[0] = new int[width];
     }
+    public boolean isCellOccupied(int row, int col) {
+        return grid[row][col] == 1 ||
+                (pieceControl.getCurrentPiece() != null && pieceControl.getCurrentPiece().isFilled(row - pieceControl.getCurrentPiece().getRow(), col - pieceControl.getCurrentPiece().getCol()));
+    }
     public PieceControl getPieceControl() {
         return pieceControl;
     }
     public int getWidth() {
         return width;
-    }
-    public boolean isCellOccupied(int row, int col) {
-        return grid[row][col] == 1 ||
-                (pieceControl.getCurrentPiece() != null && pieceControl.getCurrentPiece().isFilled(row - pieceControl.getCurrentPiece().getRow(), col - pieceControl.getCurrentPiece().getCol()));
     }
     public int getHeight() {
         return height;
