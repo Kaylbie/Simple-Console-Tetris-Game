@@ -3,7 +3,7 @@ package factory;
 import pieces.*;
 
 public class PieceFactory {
-    static final int NUM_PIECES = 7;
+    private static final int NUM_PIECES = 7;
     public static GamePiece createRandomPiece(int row, int col) {
         int randomIndex = (int) (Math.random() * NUM_PIECES);
         switch (randomIndex) {
