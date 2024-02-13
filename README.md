@@ -3,4 +3,4 @@ Simplified console Tetris game
 
 **Demo**
 
-![1702994268476](IMAGES/idea64_0tuPunkNyK.png)
+![Gameplay](IMAGES/idea64_0tuPunkNyK.gif)
