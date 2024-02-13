@@ -1,3 +1,6 @@
 Simplified console Tetris game
+# **Clean Code Practice: Tetris**
 
-Preview coming soon
+**Demo**
+
+![1702994268476](IMAGES/idea64_0tuPunkNyK.png)
